@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-不正な操作です．
+<%=request.getAttribute("errMsg")%>
 </body>
 </html>

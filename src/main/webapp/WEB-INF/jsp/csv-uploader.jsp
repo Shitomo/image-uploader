@@ -13,20 +13,10 @@
 </header>
 <body>
 <h1>Hello</h1>
-<form action="image" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="action_name" value="upload" />
-    <input type="file" name="file" />
-    <button>Upload</button>
-</form>
-<h1>CSVアップロード</h1>
 <form action="csv" method="post" enctype="multipart/form-data">
     <input type="hidden" name="action_name" value="upload" />
     <input type="file" name="file" />
     <button>Upload</button>
 </form>
-<img src=<%= image.source%> />
-<div>
-    <button class="subwindow">別のウィンドウでホームを開く</button>
-</div>
 </body>
 </html>

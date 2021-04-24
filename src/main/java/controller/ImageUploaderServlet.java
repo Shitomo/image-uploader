@@ -14,12 +14,12 @@ import action.InvalidAction;
 import bean.Image;
 
 
-@WebServlet(urlPatterns = { "/upload" })
+@WebServlet(urlPatterns = { "/image" })
 @MultipartConfig
 public class ImageUploaderServlet extends HttpServlet {
 
     @Override
-    protected void doPost(
+    protected void doPost (
             HttpServletRequest request,
             HttpServletResponse response
     )
