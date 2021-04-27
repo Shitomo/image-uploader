@@ -1,6 +1,7 @@
 package controller;
 
 import action.Action;
+import bean.Form;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,8 @@ public class SurveyCreatorServlet extends HttpServlet {
             HttpServletResponse response
     )
             throws ServletException, IOException {
+        Form form = new Form(true);
+        request.setAttribute("formData", form);
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/survey-creator.jsp");
         rd.forward(request, response);
     }
