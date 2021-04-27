@@ -23,9 +23,10 @@ public class CensusData {
 
     private static String mode;
 
+    @NotBlank(message = "都道府県コードは必須です")
     @JsonProperty("都道府県コード")
     private String id;
-    @NotBlank(message = "必須です")
+    @NotBlank(message = "都道府県名は必須です")
     @JsonProperty("都道府県名")
     private String name;
     @JsonProperty("元号")
@@ -73,5 +74,20 @@ public class CensusData {
                 ", malePopulation=" + malePopulation +
                 ", femalePopulation=" + femalePopulation +
                 '}';
+    }
+
+    public CensusData(String id, String name, String eraName, String japaneseCalendar, String westernCalendar, String note, String population, String malePopulation, String femalePopulation) {
+        this.id = id;
+        this.name = name;
+        this.eraName = eraName;
+        this.japaneseCalendar = japaneseCalendar;
+        this.westernCalendar = westernCalendar;
+        this.note = note;
+        this.population = population;
+        this.malePopulation = malePopulation;
+        this.femalePopulation = femalePopulation;
+    }
+
+    public CensusData() {
     }
 }

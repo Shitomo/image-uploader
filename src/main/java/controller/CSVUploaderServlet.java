@@ -27,6 +27,7 @@ import java.util.Set;
 
 @WebServlet(urlPatterns = { "/csv" })
 @MultipartConfig
+// Servlet クラスで指定できるアノテーション。 Servlet のインスタンスが multipart/form-data MIME タイプに準拠するリクエストを期待していることを示します。
 public class CSVUploaderServlet extends HttpServlet {
 
     @Override
