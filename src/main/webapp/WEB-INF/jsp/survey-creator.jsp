@@ -92,15 +92,14 @@ pageContext.request.contextPath =>
 <script>
     jQuery(function($) {
         var options = {
-                locale: 'ja-JP',
-                override: {
-                    'ja-JP': {
-                        addOption: '選択肢を追加'
-                    }
+                i18n: {
+                    location : '/uploader/assets/lang',
+                    locale: 'ja-JP'
                 }
             },
             $fbTemplate = $(document.getElementById('fb-editor'));
         $fbTemplate.formBuilder(options);
+        $fbTemplate.actions.setLang('ja-JP')
     });
 
     function double(btn){
