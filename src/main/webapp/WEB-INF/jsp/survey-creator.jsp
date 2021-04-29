@@ -24,6 +24,7 @@
     <script type="text/javascript" src="/uploader/js/form-render.min.js"></script>
     <script type="text/javascript" src="/uploader/js/site.min.js"></script>
     <script type="text/javascript" src="/uploader/js/subwindow.js"></script>
+    <script type="text/javascript" src="/uploader/js/starRating.js"></script>
 </header>
 <body>
 <h1>Hello</h1>
@@ -82,6 +83,11 @@ pageContext.request.contextPath =>
 </table>
 
 <div id="fb-editor"></div>
+<div id="form-output"></div>
+<form method="post" action="questions">
+    <input type="hidden" name="questions">
+    <input type="submit" value="送信">
+</form>
 </body>
 <style>
     input:read-only, textarea:read-only {
@@ -91,19 +97,128 @@ pageContext.request.contextPath =>
 </style>
 <script>
     jQuery(function($) {
+        /*let fields = [{
+            label: 'Star Rating',
+            attrs: {
+                type: 'starRating'
+            },
+            icon: '🌟'
+        }];*/
         var options = {
                 i18n: {
                     location : '/uploader/assets/lang',
                     locale: 'ja-JP'
-                }
-            },
-            $fbTemplate = $(document.getElementById('fb-editor'));
-        $fbTemplate.formBuilder(options);
-        $fbTemplate.actions.setLang('ja-JP')
+                },
+                onSave: function(evt, formData) {
+                    // Saveの時でなく編集時にこれを行いたい
+                    $('input[name="questions"]').val(formData);
+                    console.log("test")
+                },
+        };
+        $(document.getElementById('fb-editor')).formBuilder(options);
     });
 
     function double(btn){
         btn.disabled=true;
-    }
+    };
+    $('#form-output').formRender({
+        formData: `[
+  {
+    "type": "radio-group",
+    "required": false,
+    "label": "Radio Group",
+    "inline": false,
+    "name": "radio-group-1619691481840",
+    "access": false,
+    "other": false,
+    "values": [
+      {
+        "label": "選択肢1",
+        "value": "option-1",
+        "selected": false
+      },
+      {
+        "label": "選択肢2",
+        "value": "option-2",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      },
+      {
+        "label": "選択肢3",
+        "value": "option-3",
+        "selected": false
+      }
+    ]
+  },
+  {
+    "type": "checkbox-group",
+    "required": true,
+    "label": "Checkbox Group",
+    "toggle": false,
+    "inline": false,
+    "name": "checkbox-group-1619691533199",
+    "access": false,
+    "other": false,
+    "values": [
+      {
+        "label": "Option 1",
+        "value": "option-1",
+        "selected": true
+      },
+      {
+        "label": "Option 1",
+        "value": "",
+        "selected": false
+      },
+      {
+        "label": "Option 1",
+        "value": "",
+        "selected": false
+      },
+      {
+        "label": "Option 1Option 1",
+        "value": "",
+        "selected": false
+      }
+    ]
+  }
+]`,
+        dataType: 'json',
+        render: true
+    });
 </script>
 </html>
