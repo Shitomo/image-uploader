@@ -80,6 +80,14 @@ pageContext.request.contextPath =>
     　   <td><c:out value="${listItem.displayDate}"/></td>
     </tr>
 </c:forEach>
+<!--素のJSPを使う場合-->
+<%
+    for (int i = 0; i < list.size(); i++) {
+%>
+Hello World!（<%= list.get(0) %>）<br>
+<%
+    }
+%>
 </table>
 
 <div id="fb-editor"></div>
