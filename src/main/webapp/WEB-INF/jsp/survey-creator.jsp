@@ -89,11 +89,25 @@ Hello World!（<%= list.get(0) %>）<br>
     }
 %>
 </table>
+<form id="test_form" action="#" method="post">
+    <input type="text" name="hoge">
+    <div id="form-editor">
+        <input type="text" name="a">
+        <input type="text" name="b">
+        <input type="text" name="c">
+        <input type="text" name="d">
+        <input type="text" name="e">
+        <input type="hidden" name="questions">
+    </div>
+    <input type="submit" value="送信">
+</form>
+
 
 <div id="fb-editor"></div>
 <div id="form-output"></div>
 <form method="post" action="questions">
     <input type="hidden" name="questions">
+    <input type="submit" value="送信">
     <input type="submit" value="送信">
 </form>
 </body>
@@ -104,6 +118,11 @@ Hello World!（<%= list.get(0) %>）<br>
     }
 </style>
 <script>
+    $('#test_form').submit(function() {
+        var data = $('#form-editor').serializeArray();
+        //ここで実行するとsubmitされるデータに含まれる
+        $('input[name="questions"]').val(data);
+    })
     jQuery(function($) {
         /*let fields = [{
             label: 'Star Rating',
