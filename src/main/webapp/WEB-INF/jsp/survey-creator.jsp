@@ -92,15 +92,29 @@ Hello World!（<%= list.get(0) %>）<br>
 <form id="test_form" action="#" method="post">
     <input type="text" name="hoge">
     <div id="form-editor">
-        <input type="text" name="a">
-        <input type="text" name="b">
-        <input type="text" name="c">
-        <input type="text" name="d">
-        <input type="text" name="e">
-        <div id="option">
-            <input type="text" name="g">
+        <div class="question">
+            <input type="text" name="a">
+            <input type="text" name="b">
+            <input type="text" name="c">
             <input type="text" name="d">
-            <input type="text" name="t">
+            <input type="text" name="e">
+            <div class="option">
+                <input type="text" name="g">
+                <input type="text" name="d">
+                <input type="text" name="t">
+            </div>
+        </div>
+        <div class="question">
+            <input type="text" name="a">
+            <input type="text" name="b">
+            <input type="text" name="c">
+            <input type="text" name="d">
+            <input type="text" name="e">
+            <div class="option">
+                <input type="text" name="g">
+                <input type="text" name="d">
+                <input type="text" name="t">
+            </div>
         </div>
         <input type="hidden" name="questions">
     </div>
@@ -123,6 +137,20 @@ Hello World!（<%= list.get(0) %>）<br>
     }
 </style>
 <script>
+    class Question {
+        constructor(, width) {
+            this.height = height;
+            this.width = width;
+        }
+    };
+
+    //設問配列を取り出す
+    var questions = $('#form-editor .question');
+    questions.each( function(index, question) {
+        console.log($(question).find("select, textarea, input").not(".option").serializeArray());
+    });
+
+
     $('#test_form').submit(function() {
         //$("#divId").find("select, textarea, input").serialize();
         // こうすることでdiv要素内のinputをシリアライズする．
