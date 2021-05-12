@@ -97,6 +97,11 @@ Hello World!（<%= list.get(0) %>）<br>
         <input type="text" name="c">
         <input type="text" name="d">
         <input type="text" name="e">
+        <div id="option">
+            <input type="text" name="g">
+            <input type="text" name="d">
+            <input type="text" name="t">
+        </div>
         <input type="hidden" name="questions">
     </div>
     <input type="submit" value="送信">
@@ -119,9 +124,11 @@ Hello World!（<%= list.get(0) %>）<br>
 </style>
 <script>
     $('#test_form').submit(function() {
-        var data = $('#form-editor').serializeArray();
+        //$("#divId").find("select, textarea, input").serialize();
+        // こうすることでdiv要素内のinputをシリアライズする．
+        var data = $('#form-editor :input').serializeArray();
         //ここで実行するとsubmitされるデータに含まれる
-        $('input[name="questions"]').val(data);
+        $('input[name="questions"]').val("test");
     })
     jQuery(function($) {
         /*let fields = [{
