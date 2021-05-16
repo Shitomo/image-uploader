@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takokun.demo.user.infrastructure.mapper.BookMapper">
+<!--UUIDは，「::UUID」でキャストしないとうまく動作しない-->
+<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO book
+    (
+    title,
+    author)
+    VALUES
+    (
+    #{title},
+     'test'
+    )
+</insert>
+
+<insert id="insertAuthorsWithBook" useGeneratedKeys="true" keyProperty="authors.id">
+    INSERT INTO author
+    (
+    book_id,
+    name
+    )
+    VALUES
+    <foreach item="author" index="index" collection="authors" separator=",">
+        (
+        #{id},
+        #{author.name}
+        )
+    </foreach>
+</insert>
+
+<insert id="insertAuthors" useGeneratedKeys="true" keyProperty="authors.id" keyColumn="id">
+    INSERT INTO author
+    (
+        book_id,
+        id,
+        name
+    )
+    VALUES
+    <foreach item="author" index="index" collection="authors" separator=",">
+        (
+            #{bookId},
+            (
+                SELECT
+                    COALESCE(max(book_id), 0) + #{index} + 1
+                FROM author
+                WHERE book_id = #{bookId}
+            ),
+            #{author.name}
+        )
+    </foreach>
+</insert>
+
+<insert id="insertFans">
+    INSERT INTO fan
+    (
+        book_id,
+        author_id,
+        id,
+        name
+    )
+    VALUES
+    <foreach item="author" collection="authors" separator=",">
+        <foreach item="fan" index="index" collection="author.fans" separator=",">
+            (
+                #{bookId},
+                #{author.id},
+                (
+                SELECT
+                    COALESCE(max(author_id), 0) + #{index} + 1
+                FROM fan
+                WHERE book_id = #{bookId} AND author_id = #{author.id}
+                ),
+                #{fan.name}
+            )
+        </foreach>
+    </foreach>
+</insert>
+</mapper>
