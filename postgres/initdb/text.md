@@ -37,3 +37,16 @@ fun numberingAuthor(bookId : Long, authors : List<Author>) {
         }
     }
 ```
+
+```json
+
+{
+  id : "1",
+  answers : {
+        "1" : [{"answer" : "1"}, {"answer" : "2"}],
+        "2" : [{"answer" : "test"}],
+        
+  }
+}
+
+```
