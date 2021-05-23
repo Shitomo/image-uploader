@@ -16,3 +16,24 @@ numberingAuthor(book.id, authors)
         bookMapper.insertAuthor(book.id, authors2)
         bookMapper.insertFan(book.id, authors2)
         ```
+        
+        
+        
+```
+fun numberingAuthor(bookId : Long, authors : List<Author>) {
+        // 設問を採番
+        var maxAuthorId  = bookMapper.getMaxAuthorId(bookId)
+        for (author in authors) {
+            if(author.id == -1L) {
+                author.id = ++maxAuthorId;
+            }
+            // 選択肢を採番
+            var maxFanId  = bookMapper.getMaxFanId(bookId, author.id)
+            for (fan in author.fans) {
+                if(fan.id == -1L) {
+                    fan.id = ++maxFanId;
+                }
+            }
+        }
+    }
+```
